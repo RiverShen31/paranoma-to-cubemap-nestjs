@@ -27,13 +27,14 @@ export class FileUploadController {
         }
 
         try {
-            await this.fileUploadService.processImage(file.path);  // Ensure this method is available
+            const directoryPath = await this.fileUploadService.processImage(file.path);  // Ensure this method is available
             return res.status(HttpStatus.CREATED).json({
                 message: 'File uploaded and processed successfully',
                 data: {
                     originalName: file.originalname,
                     filename: file.filename,
                     path: file.path,
+                    directoryPath
                 }
             });
         } catch (error) {
